@@ -7,7 +7,7 @@ public class Main {
         hospital.addPatient();
         hospital.addPatient();
 
-        // Remove 1 patient
+        // Remove 1 patient hi
         hospital.removePatient();
 
         // Print patient count
