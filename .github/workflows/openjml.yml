@@ -31,7 +31,7 @@ jobs:
       - name: Verify OpenJML installation
         run: |
           echo $PATH
-          openjml -version
+          ./openjml -version
 
       - name: Run OpenJML on project
-        run: openjml -rac -d out src/**/*.java
+        run: ./openjml -rac -d out src/**/*.java
