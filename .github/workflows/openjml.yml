@@ -38,4 +38,6 @@ jobs:
           cd src
 
       - name: Run OpenJML on project
-        run: /OpenJML-0.21.0-alpha-0/openjml -rac -d out ./src/**/*.java ./src/*.java
+        run: |
+          shopt -s globstar
+          /OpenJML-0.21.0-alpha-0/openjml -rac -d out ./src/**/*.java ./src/*.java
