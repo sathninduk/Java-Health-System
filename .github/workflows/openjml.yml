@@ -24,8 +24,8 @@ jobs:
 
       - name: Download OpenJML
         run: |
-          wget http://www.openjml.org/downloads/openjml-latest.tar.gz
-          tar -xzf openjml-latest.tar.gz
+          wget https://github.com/OpenJML/OpenJML/releases/download/0.21.0-alpha-0/openjml-ubuntu-22.04-0.21.0-alpha-0.zip
+          tar -xzf openjml-ubuntu-22.04-0.21.0-alpha-0.zip
           export PATH=$PATH:$PWD/openjml/bin
 
       - name: Verify OpenJML installation
