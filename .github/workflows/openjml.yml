@@ -32,5 +32,10 @@ jobs:
           echo $PATH
           /OpenJML-0.21.0-alpha-0/openjml -version
 
+      - name: clone git repo
+        run: |
+          git clone https://github.com/sathninduk/Java-Health-System src
+          cd src
+
       - name: Run OpenJML on project
-        run: /OpenJML-0.21.0-alpha-0/openjml -rac -d out src/**/*.java
+        run: /OpenJML-0.21.0-alpha-0/openjml -rac -d out ./src/**/*.java
