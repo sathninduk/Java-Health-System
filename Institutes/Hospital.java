@@ -1,3 +1,5 @@
+package Institutes;
+
 public class Hospital {
     // Attributes
     private int patientCount = 0;
