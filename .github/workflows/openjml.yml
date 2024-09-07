@@ -29,7 +29,9 @@ jobs:
           export PATH=$PATH:$PWD/OpenJML-0.21.0-alpha-0/bin
 
       - name: Verify OpenJML installation
-        run: openjml -version
+        run: |
+          echo $PATH
+          openjml -version
 
       - name: Run OpenJML on project
         run: openjml -rac -d out src/**/*.java
