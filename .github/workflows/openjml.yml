@@ -26,12 +26,11 @@ jobs:
         run: |
           sudo wget https://github.com/OpenJML/OpenJML/releases/download/0.21.0-alpha-0/openjml-ubuntu-22.04-0.21.0-alpha-0.zip -O /openjml-ubuntu-22.04-0.21.0-alpha-0.zip
           sudo unzip /openjml-ubuntu-22.04-0.21.0-alpha-0.zip -d /OpenJML-0.21.0-alpha-0
-          export PATH=/OpenJML-0.21.0-alpha-0/bin
 
       - name: Verify OpenJML installation
         run: |
           echo $PATH
-          openjml -version
+          /OpenJML-0.21.0-alpha-0/openjml -version
 
       - name: Run OpenJML on project
-        run: openjml -rac -d out src/**/*.java
+        run: /OpenJML-0.21.0-alpha-0/openjml -rac -d out src/**/*.java
