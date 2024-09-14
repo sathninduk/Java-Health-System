@@ -39,7 +39,7 @@ jobs:
 
       - name: Identify Latest Changes
         run: |
-          git log --name-only --pretty="" -n 1 -- '*.java'
+          git log --name-only --pretty="" -n 1
 
       - name: Run OpenJML on project
         run: |
