@@ -9,7 +9,7 @@ import javax.annotation.concurrent.Immutable;
  * @author [Your Name]
  */
 @Immutable
-public class Crow {
+public class CrowTemp {
     /** The color of the crow. */
     @Nonnull
     private final String color;
@@ -22,7 +22,7 @@ public class Crow {
      *
      * @param color the color of the crow
      */
-    public Crow(@Nonnull String color) {
+    public CrowTemp(@Nonnull String color) {
         this.color = color;
         this.age = 0;
     }
