@@ -1,18 +1,12 @@
 package Animal.Birds;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents a crow with a specific color and age.
- *
- * @author [Your Name]
  */
-@Immutable
 public class CrowTemp {
     /** The color of the crow. */
-    @Nonnull
-    private final String color;
+    private String color;
 
     /** The age of the crow. */
     private int age;
@@ -22,7 +16,7 @@ public class CrowTemp {
      *
      * @param color the color of the crow
      */
-    public CrowTemp(@Nonnull String color) {
+    public CrowTemp(String color) {
         this.color = color;
         this.age = 0;
     }
@@ -32,7 +26,6 @@ public class CrowTemp {
      *
      * @return the color of the crow
      */
-    @Nonnull
     public String getColor() {
         return color;
     }
@@ -80,7 +73,7 @@ public class CrowTemp {
      *
      * @param color the new color of the crow
      */
-    public void setColor(@Nonnull String color) {
+    public void setColor(String color) {
         this.color = color;
     }
 }
