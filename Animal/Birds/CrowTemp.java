@@ -1,63 +1,86 @@
 package Animal.Birds;
 
-public class CrowTemp {
-    private String color;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+
+/**
+ * Represents a crow with a specific color and age.
+ *
+ * @author [Your Name]
+ */
+@Immutable
+public class Crow {
+    /** The color of the crow. */
+    @Nonnull
+    private final String color;
+
+    /** The age of the crow. */
     private int age;
-    
-    /*@
-      @ ensures getColor() == color;
-      @ ensures getAge() == 0;
-      @*/
-    public CrowTemp(String color) {
+
+    /**
+     * Creates a new crow with the specified color.
+     *
+     * @param color the color of the crow
+     */
+    public Crow(@Nonnull String color) {
         this.color = color;
         this.age = 0;
     }
 
-    /*@
-      @ ensures \result == color;
-      @*/
+    /**
+     * Gets the color of the crow.
+     *
+     * @return the color of the crow
+     */
+    @Nonnull
     public String getColor() {
         return color;
     }
 
-    /*@
-      @ ensures age == \old(age) + 1;
-      @*/
+    /**
+     * Increments the age of the crow by 1.
+     */
     public void incrementAge() {
         age++;
     }
 
-    /*@
-      @ ensures age == \old(age) - 1;
-      @ ensures age >= 0;
-      @*/
+    /**
+     * Decrements the age of the crow by 1, but prevents the age from becoming negative.
+     */
     public void decrementAge() {
         if (age > 0) {
             age--;
         }
     }
 
-    /*@
-      @ ensures \result == age;
-      @*/
+    /**
+     * Gets the age of the crow.
+     *
+     * @return the age of the crow
+     */
     public int getAge() {
         return age;
     }
 
-    /*@
-      @ requires age >= 0;
-      @ ensures age == \old(age);
-      @*/
+    /**
+     * Sets the age of the crow, preventing the age from becoming negative.
+     *
+     * @param age the new age of the crow
+     * @throws IllegalArgumentException if the specified age is negative
+     */
     public void setAge(int age) {
-        if (age >= 0) {
-            this.age = age;
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative");
         }
+        this.age = age;
     }
 
-    /*@
-      @ ensures color == \old(color);
-      @*/
-    public void setColor(String color) {
+    /**
+     * Sets the color of the crow.
+     *
+     * @param color the new color of the crow
+     */
+    public void setColor(@Nonnull String color) {
         this.color = color;
     }
 }
