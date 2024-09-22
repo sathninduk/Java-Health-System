@@ -14,21 +14,21 @@ public class CrowTemp {
     }
 
     /*@
-      @ ensures \\result == color;
+      @ ensures \result == color;
       @*/
     public String getColor() {
         return color;
     }
 
     /*@
-      @ ensures age == \\old(age) + 1;
+      @ ensures age == \old(age) + 1;
       @*/
     public void incrementAge() {
         age++;
     }
 
     /*@
-      @ ensures age == \\old(age) - 1;
+      @ ensures age == \old(age) - 1;
       @ ensures age >= 0;
       @*/
     public void decrementAge() {
@@ -38,7 +38,7 @@ public class CrowTemp {
     }
 
     /*@
-      @ ensures \\result == age;
+      @ ensures \result == age;
       @*/
     public int getAge() {
         return age;
@@ -46,7 +46,7 @@ public class CrowTemp {
 
     /*@
       @ requires age >= 0;
-      @ ensures age == \\old(age);
+      @ ensures age == \old(age);
       @*/
     public void setAge(int age) {
         if (age >= 0) {
@@ -55,7 +55,7 @@ public class CrowTemp {
     }
 
     /*@
-      @ ensures color == \\old(color);
+      @ ensures color == \old(color);
       @*/
     public void setColor(String color) {
         this.color = color;
