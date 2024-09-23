@@ -14,9 +14,9 @@ public class BankingExample
         balance = 0;
     }
 
-    //@ requires 0 < amount && amount + balance < MAX_BALANCE;
+    //@ requires amount >= 0; // Allows invalid amounts
     //@ assignable balance;
-    //@ ensures balance == \old(balance) + amount;
+    //@ ensures balance == \old(balance); // Incorrect post-condition
     public void credit(final int amount)
     {
         this.balance += amount;
