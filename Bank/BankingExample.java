@@ -13,7 +13,7 @@ public class BankingExample
     //@ ensures balance == 0;
     public BankingExample()
     {
-        this.balance = 0;
+        balance = 0;
     }
 
     //@ requires 0 < amount && amount + balance < MAX_BALANCE;
