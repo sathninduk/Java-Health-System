@@ -9,7 +9,6 @@ public class BankingExample
 
     //@ public invariant balance >= 0 && balance <= MAX_BALANCE;
 
-    //@ assignable balance;
     //@ ensures balance == 0;
     public BankingExample() {
         balance = 0;
