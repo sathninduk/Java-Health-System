@@ -1,78 +1,47 @@
 package Animal.Birds;
 
-
-/**
- * Represents a crow with a specific color and age.
- */
+/*@ spec_public */
 public class CrowTemp {
-    /** The color of the crow. */
+    /*@ invariant color != null; */
+    /*@ invariant age >= 0; */
     private String color;
-
-    /** The age of the crow. */
     private int age;
 
-    /**
-     * Creates a new crow with the specified color.
-     *
-     * @param color the color of the crow
-     */
+    /*@ requires color != null; */
+    /*@ ensures this.color == color && this.age == 0; */
     public CrowTemp(String color) {
         this.color = color;
         this.age = 0;
     }
 
-    /**
-     * Gets the color of the crow.
-     *
-     * @return the color of the crow
-     */
+    /*@ ensures \result == this.color; */
     public String getColor() {
         return color;
     }
 
-    /**
-     * Increments the age of the crow by 1.
-     */
+    /*@ ensures this.age == \old(this.age) + 1; */
     public void incrementAge() {
         age++;
     }
 
-    /**
-     * Decrements the age of the crow by 1, but prevents the age from becoming negative.
-     */
+    /*@ ensures this.age == \old(this.age) - 1; */
     public void decrementAge() {
-        if (age > 0) {
-            age--;
-        }
+        age--;
     }
 
-    /**
-     * Gets the age of the crow.
-     *
-     * @return the age of the crow
-     */
+    /*@ ensures \result == this.age; */
     public int getAge() {
         return age;
     }
 
-    /**
-     * Sets the age of the crow, preventing the age from becoming negative.
-     *
-     * @param age the new age of the crow
-     * @throws IllegalArgumentException if the specified age is negative
-     */
+    /*@ requires age >= 0; */
+    /*@ ensures this.age == age; */
     public void setAge(int age) {
-        if (age < 0) {
-            throw new IllegalArgumentException("Age cannot be negative");
-        }
         this.age = age;
     }
 
-    /**
-     * Sets the color of the crow.
-     *
-     * @param color the new color of the crow
-     */
+    /*@ requires color != null; */
+    /*@ ensures this.color == color; */
     public void setColor(String color) {
         this.color = color;
     }
