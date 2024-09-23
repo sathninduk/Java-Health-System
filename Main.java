@@ -1,16 +1,13 @@
+import Bank.BankingExample;
+
 public class Main {
     public static void main(String[] args) {
-        Hospital hospital = new Hospital();
-
-        // Add 3 patients
-        hospital.addPatient();
-        hospital.addPatient();
-        hospital.addPatient();
-
-        // Remove 1 patient
-        hospital.removePatient();
-
-        // Print patient count
-        hospital.print();
+        BankingExample bank = new BankingExample();
+        try {
+            bank.lockAccount();
+            System.out.println(bank.getBalance());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
