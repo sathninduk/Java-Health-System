@@ -11,8 +11,7 @@ public class BankingExample
 
     //@ assignable balance;
     //@ ensures balance == 0;
-    public BankingExample()
-    {
+    public BankingExample() {
         balance = 0;
     }
 
