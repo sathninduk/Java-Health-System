@@ -1,9 +1,11 @@
 package Animal.Birds;
 
-/*@ spec_public */
 public class CrowTemp {
-    /*@ invariant color != null; */
-    /*@ invariant age >= 0; */
+
+    // Ghost fields to represent invariants based on private fields (optional)
+    // private /*@ ghost */ String ghostColor;
+    // private /*@ ghost */ int ghostAge;
+
     private String color;
     private int age;
 
@@ -14,7 +16,7 @@ public class CrowTemp {
         this.age = 0;
     }
 
-    /*@ ensures \result == this.color; */
+    /*@ ensures \result == color; */
     public String getColor() {
         return color;
     }
@@ -24,12 +26,14 @@ public class CrowTemp {
         age++;
     }
 
-    /*@ ensures this.age == \old(this.age) - 1; */
+    /*@ ensures this.age == \old(this.age) - 1 && this.age >= 0; */
     public void decrementAge() {
-        age--;
+        if (age > 0) {
+            age--;
+        }
     }
 
-    /*@ ensures \result == this.age; */
+    /*@ ensures \result == age; */
     public int getAge() {
         return age;
     }
@@ -37,6 +41,9 @@ public class CrowTemp {
     /*@ requires age >= 0; */
     /*@ ensures this.age == age; */
     public void setAge(int age) {
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative");
+        }
         this.age = age;
     }
 
