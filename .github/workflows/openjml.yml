@@ -44,6 +44,7 @@ jobs:
           shopt -s globstar
           /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java 2>&1 | tee openjml.log
           echo "Logs have been saved to $(pwd)/openjml.log"
+          cat ./openjml.log
 
 #      - name: Set up Google Cloud SDK
 #          uses: google-github-actions/setup-gcloud@v1
