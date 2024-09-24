@@ -42,7 +42,7 @@ jobs:
       - name: Run OpenJML on project
         run: |
           shopt -s globstar
-          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java > openjml.log
+          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java
 
       - name: Check if openjml.log exists and display it
         run: |
