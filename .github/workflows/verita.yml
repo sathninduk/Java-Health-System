@@ -1,11 +1,60 @@
-name: CI
+name: Verita
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  build:
+  openjml:
+    name: Run OpenJML
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo Hello, world!
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Download OpenJML
+        run: |
+          sudo wget https://github.com/OpenJML/OpenJML/releases/download/0.21.0-alpha-0/openjml-ubuntu-22.04-0.21.0-alpha-0.zip -O /openjml-ubuntu-22.04-0.21.0-alpha-0.zip
+          sudo unzip /openjml-ubuntu-22.04-0.21.0-alpha-0.zip -d /OpenJML-0.21.0-alpha-0
+
+      - name: Verify OpenJML installation
+        run: |
+          echo $PATH
+          /OpenJML-0.21.0-alpha-0/openjml -version
+
+      - name: clone git repo
+        run: |
+          git clone https://github.com/sathninduk/Java-Health-System src
+          cd src
+      - name: Identify Latest Changes
+        run: |
+          git log --name-only --pretty="" -n 1
+      - name: Run OpenJML and save logs
+        run: |
+          shopt -s globstar
+          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java 2>&1 | tee openjml.log
+          echo "Logs have been saved to $(pwd)/openjml.log"
+          cat ./openjml.log
+
+#      - name: Set up Google Cloud SDK
+#          uses: google-github-actions/setup-gcloud@v1
+#          with:
+#            project_id: ${{ secrets.GCP_PROJECT_ID }}
+#            service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+#
+#            - name: Authenticate with Google Cloud
+#              run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+#
+#            - name: Upload OpenJML Logs to Google Cloud Storage
+#              run: |
+#                gsutil cp openjml.log gs://your-bucket-name/path/to/logs/openjml.log
