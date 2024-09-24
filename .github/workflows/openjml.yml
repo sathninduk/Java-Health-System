@@ -43,7 +43,8 @@ jobs:
       - name: Run OpenJML on project
         run: |
           shopt -s globstar
-          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java
+          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java > openjml.log
+          cat openjml.log
 #      - name: Set up Google Cloud SDK
 #          uses: google-github-actions/setup-gcloud@v1
 #          with:
