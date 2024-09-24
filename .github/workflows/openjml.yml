@@ -43,4 +43,17 @@ jobs:
       - name: Run OpenJML on project
         run: |
           shopt -s globstar
-          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java
+          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java > openjml.log
+          cat openjml.log
+#      - name: Set up Google Cloud SDK
+#          uses: google-github-actions/setup-gcloud@v1
+#          with:
+#            project_id: ${{ secrets.GCP_PROJECT_ID }}
+#            service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+#
+#            - name: Authenticate with Google Cloud
+#              run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+#
+#            - name: Upload OpenJML Logs to Google Cloud Storage
+#              run: |
+#                gsutil cp openjml.log gs://your-bucket-name/path/to/logs/openjml.log
