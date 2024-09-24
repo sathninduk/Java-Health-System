@@ -36,7 +36,6 @@ jobs:
         run: |
           git clone https://github.com/sathninduk/Java-Health-System src
           cd src
-
       - name: Identify Latest Changes
         run: |
           git log --name-only --pretty="" -n 1
@@ -44,7 +43,16 @@ jobs:
         run: |
           shopt -s globstar
           /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java > openjml.log
-          ls
+
+      - name: Check if openjml.log exists and display it
+        run: |
+          if [ -f openjml.log ]; then
+            echo "openjml.log exists:"
+            cat openjml.log
+          else
+            echo "openjml.log does not exist."
+            exit 1
+          fi
 #      - name: Set up Google Cloud SDK
 #          uses: google-github-actions/setup-gcloud@v1
 #          with:
