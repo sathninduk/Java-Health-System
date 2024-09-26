@@ -43,22 +43,13 @@ jobs:
       - name: Send OpenJML logs to verita
         run: |
           REPO_NAME=$(echo $GITHUB_REPOSITORY)
-          FILE_NAME="openjml_log_${GITHUB_REPOSITORY//\//_}_$(date +%Y%m%d%H%M%S).log"
+          BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+          COMMIT_ID=$(git rev-parse --short HEAD)
+          FILE_NAME="log_${GITHUB_REPOSITORY//\//_}_${BRANCH_NAME}_${COMMIT_ID}.log"
           sudo curl --location 'https://verita-logger-api.dpacks.net' \
           --header 'x-api-key: 248frv384' \
           --form "filename=${FILE_NAME}" \
           --form "repository=${REPO_NAME}" \
+          --form "branch=main" \
+          --form "commit_id=${COMMIT_ID}" \
           --form "file=@$(pwd)/openjml.log"
-
-#      - name: Set up Google Cloud SDK
-#          uses: google-github-actions/setup-gcloud@v1
-#          with:
-#            project_id: ${{ secrets.GCP_PROJECT_ID }}
-#            service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-#
-#            - name: Authenticate with Google Cloud
-#              run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-#
-#            - name: Upload OpenJML Logs to Google Cloud Storage
-#              run: |
-#                gsutil cp openjml.log gs://your-bucket-name/path/to/logs/openjml.log
