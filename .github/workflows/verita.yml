@@ -15,23 +15,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'temurin'
-
       - name: Download OpenJML
         run: |
           sudo wget https://github.com/OpenJML/OpenJML/releases/download/0.21.0-alpha-0/openjml-ubuntu-22.04-0.21.0-alpha-0.zip -O /openjml-ubuntu-22.04-0.21.0-alpha-0.zip
           sudo unzip /openjml-ubuntu-22.04-0.21.0-alpha-0.zip -d /OpenJML-0.21.0-alpha-0
-
       - name: Verify OpenJML installation
         run: |
           echo $PATH
           /OpenJML-0.21.0-alpha-0/openjml -version
-
       - name: clone git repo
         run: |
           git clone https://github.com/sathninduk/Java-Health-System src
@@ -44,7 +40,15 @@ jobs:
           shopt -s globstar
           /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java 2>&1 | tee openjml.log
           echo "Logs have been saved to $(pwd)/openjml.log"
-          cat ./openjml.log
+      - name: Send OpenJML log to endpoint
+        run: |
+          REPO_NAME=$(echo $GITHUB_REPOSITORY)
+          FILE_NAME="openjml_log_${GITHUB_REPOSITORY//\//_}_$(date +%Y%m%d%H%M%S).log"
+          curl --location 'https://verita-logger-api.dpacks.net' \
+          --header 'x-api-key: 248frv384' \
+          --form "filename=${FILE_NAME}" \
+          --form "repository=${REPO_NAME}" \
+          --form "file=@./openjml.log"
 
 #      - name: Set up Google Cloud SDK
 #          uses: google-github-actions/setup-gcloud@v1
