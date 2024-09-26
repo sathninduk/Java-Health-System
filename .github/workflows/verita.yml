@@ -44,11 +44,11 @@ jobs:
         run: |
           REPO_NAME=$(echo $GITHUB_REPOSITORY)
           FILE_NAME="openjml_log_${GITHUB_REPOSITORY//\//_}_$(date +%Y%m%d%H%M%S).log"
-          curl --location 'https://verita-logger-api.dpacks.net' \
+          sudo curl --location 'https://verita-logger-api.dpacks.net' \
           --header 'x-api-key: 248frv384' \
           --form "filename=${FILE_NAME}" \
           --form "repository=${REPO_NAME}" \
-          --form "file=@./openjml.log"
+          --form "file=@$(pwd)/openjml.log"
 
 #      - name: Set up Google Cloud SDK
 #          uses: google-github-actions/setup-gcloud@v1
