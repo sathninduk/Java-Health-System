@@ -21,4 +21,6 @@ jobs:
           cd src
       - name: Show Changed Files for Specific Commit
         run: |
+          git fetch origin main
+          git checkout main
           git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
