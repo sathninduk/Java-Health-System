@@ -21,9 +21,8 @@ jobs:
           cd src
       - name: Show Changed Files for Specific Commit
         run: |
-          git show --name-only --pretty="" fe799b1 > changed_files.log
-          echo "Changed files in commit fe799b1:"
-          cat changed_files.log
+          git fetch origin
+          git show --name-only --pretty="" origin/main fe799b1
       - name: Run OpenJML and save logs
         run: |
           shopt -s globstar
