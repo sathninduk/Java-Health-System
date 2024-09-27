@@ -8,19 +8,23 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  cognitive:
-    name: Run Cognitive Relevance Check
+  list-changed-files:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository   # checkout the repository
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: clone git repo
+
+      - name: Get list of changed files
+        id: changed_files
         run: |
-          git clone https://github.com/sathninduk/Java-Health-System src
-          cd src
-      - name: Show Changed Files for Specific Commit
+          # Fetch the previous commit
+          git fetch origin main --depth=2
+          # List changed files between the last commit and the current one
+          git diff --name-only HEAD^ HEAD > changed_files.txt
+          # Display changed files in the log
+          cat changed_files.txt
+
+      - name: Display Changed Files in the Workflow
         run: |
-          git fetch origin main
-          git checkout main
-          git show --name-only --pretty="" ${{ github.sha }} 
+          echo "The following files were changed:"
+          cat changed_files.txt
