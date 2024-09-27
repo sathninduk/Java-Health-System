@@ -21,7 +21,7 @@ jobs:
           cd src
       - name: Show Changed Files for Specific Commit
         run: |
-          COMMIT_ID="$(git rev-parse --abbrev-ref HEAD)"
+          COMMIT_ID="7c52e6e"
           git show --name-only --pretty="" $COMMIT_ID > changed_files.log
           echo "Changed files in commit $COMMIT_ID:"
           cat changed_files.log
