@@ -22,7 +22,8 @@ jobs:
       - name: Show Changed Files for Specific Commit
         run: |
           git fetch origin
-          git show --name-only --pretty="" origin/main fe799b1
+          git fetch origin main
+          git show --name-only --pretty="" fe799b1
       - name: Run OpenJML and save logs
         run: |
           shopt -s globstar
