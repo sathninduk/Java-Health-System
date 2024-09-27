@@ -1,7 +1,6 @@
 package Bank;
 
 public class BankingExample {
-    public static final int MAX_BALANCE = 1000;
     private int balance;
     private boolean isLocked = false;
 

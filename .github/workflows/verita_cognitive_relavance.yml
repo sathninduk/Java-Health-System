@@ -17,14 +17,10 @@ jobs:
       - name: Get list of changed files
         id: changed_files
         run: |
-          # Fetch the previous commit
           git fetch origin main --depth=2
-          # List changed files between the last commit and the current one
-          git diff --name-only HEAD^ HEAD > changed_files.txt
-          # Display changed files in the log
+          git diff --name-only HEAD^ HEAD | grep '\.java$' > changed_files.txt
           cat changed_files.txt
 
       - name: Display Changed Files in the Workflow
         run: |
-          echo "The following files were changed:"
           cat changed_files.txt
