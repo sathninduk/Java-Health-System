@@ -23,4 +23,4 @@ jobs:
         run: |
           git fetch origin main
           git checkout main
-          git diff --name-only HEAD^..HEAD
+          git show --name-only --pretty="" ${{ github.sha }} 
