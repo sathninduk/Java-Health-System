@@ -21,24 +21,4 @@ jobs:
           cd src
       - name: Show Changed Files for Specific Commit
         run: |
-          git fetch origin
-          git fetch origin main
-          git show --name-only --pretty="" fe799b1
-      - name: Run OpenJML and save logs
-        run: |
-          shopt -s globstar
-          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java 2>&1 | tee openjml.log
-          echo "Logs have been saved to $(pwd)/openjml.log"
-      - name: Send OpenJML logs to verita
-        run: |
-          REPO_NAME=$(echo $GITHUB_REPOSITORY)
-          BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
-          COMMIT_ID=$(git rev-parse --short HEAD)
-          FILE_NAME="log_${GITHUB_REPOSITORY//\//_}_${BRANCH_NAME}_${COMMIT_ID}.log"
-          sudo curl --location 'https://verita-logger-api.dpacks.net' \
-          --header 'x-api-key: 248frv384' \
-          --form "filename=${FILE_NAME}" \
-          --form "repository=${REPO_NAME}" \
-          --form "branch=main" \
-          --form "commit_id=${COMMIT_ID}" \
-          --form "file=@$(pwd)/openjml.log"
+          git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
