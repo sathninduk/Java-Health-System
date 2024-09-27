@@ -15,21 +15,20 @@ jobs:
     steps:
       - name: Checkout repository   # checkout the repository
         uses: actions/checkout@v3
-
+      - name: clone git repo
+        run: |
+          git clone https://github.com/sathninduk/Java-Health-System src
+          cd src
       - name: Show Changed Files for Specific Commit
         run: |
-          COMMIT_ID="7c52e6e"
-          git fetch origin main
-          git show --name-only --pretty="" $COMMIT_ID > changed_files.log
-          echo "Changed files in commit $COMMIT_ID:"
+          git show --name-only --pretty="" fe799b1 > changed_files.log
+          echo "Changed files in commit fe799b1:"
           cat changed_files.log
-
       - name: Run OpenJML and save logs
         run: |
           shopt -s globstar
-          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./**/*.java ./*.java 2>&1 | tee openjml.log
+          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java 2>&1 | tee openjml.log
           echo "Logs have been saved to $(pwd)/openjml.log"
-
       - name: Send OpenJML logs to verita
         run: |
           REPO_NAME=$(echo $GITHUB_REPOSITORY)
