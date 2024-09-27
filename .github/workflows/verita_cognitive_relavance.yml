@@ -23,4 +23,4 @@ jobs:
         run: |
           git fetch origin main
           git checkout main
-          git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+          git diff --name-only HEAD^..HEAD
