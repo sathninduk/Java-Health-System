@@ -23,6 +23,10 @@ public class BankingExample {
         this.isLocked = true;
     }
 
+    public void byeAccount() {
+        this.isLocked = true;
+    }
+
     public int getBalance() throws BankingException {
         if (!this.isLocked) {
             return this.balance;
