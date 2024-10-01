@@ -61,4 +61,4 @@ jobs:
           --form "repository=${REPO_NAME}" \
           --form "branch=main" \
           --form "commit_id=${COMMIT_ID}" \
-          --form "file=@$(pwd)/openjml.log"
+          --form "file=@$(pwd)/openjml.xml"
