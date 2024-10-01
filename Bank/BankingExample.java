@@ -6,6 +6,7 @@ public class BankingExample {
     private int balance;
     private boolean isLocked = false;
 
+    // Constructor
     public BankingExample() {
         balance = 0;
     }

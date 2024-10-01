@@ -38,7 +38,16 @@ jobs:
       - name: Run OpenJML and save logs
         run: |
           shopt -s globstar
-          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java 2>&1 | tee openjml.log
+          /OpenJML-0.21.0-alpha-0/openjml -esc -progress ./src/**/*.java ./src/*.java 2>&1 | tee openjml.log | awk '
+            BEGIN {
+            print "<OpenJMLLogs>";
+          }
+            {
+              print "  <LogEntry>" $0 "</LogEntry>";
+            }
+            END {
+            print "</OpenJMLLogs>";
+          }' > openjml.xml
           echo "Logs have been saved to $(pwd)/openjml.log"
       - name: Send OpenJML logs to verita
         run: |
