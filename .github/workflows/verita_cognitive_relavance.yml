@@ -27,4 +27,3 @@ jobs:
             --form "file_name=${FILE_NAME}" \
             --form "commit_id=${COMMIT_ID}" \
             --form "branch=${BRANCH_NAME}"
-          done < changed_files.txt
