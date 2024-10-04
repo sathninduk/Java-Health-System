@@ -3,7 +3,7 @@ name: Verita - Cognitive Relevance
 on:
   push:
     branches:
-      - main    # Run on main branch
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -13,13 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Get list of changed Java files
-        id: changed_files
-        run: |
-          git fetch origin main --depth=2
-          git diff --name-only HEAD^ HEAD | grep '\.java$' > changed_files.txt
-          cat changed_files.txt
 
       - name: Send changed Java files to Verita
         run: |

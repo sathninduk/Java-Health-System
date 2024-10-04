@@ -1,5 +1,5 @@
 /**
- * requirement:
+ * requirements:
  * need a class to represent a bank account, which has the following methods:
  * 1. credit(int amount) - add money to the account
  * 2. debit(int amount) - remove money from the account
