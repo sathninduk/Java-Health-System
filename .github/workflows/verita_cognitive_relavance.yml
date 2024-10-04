@@ -19,7 +19,8 @@ jobs:
           REPO_NAME=$(echo $GITHUB_REPOSITORY)
           BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
           COMMIT_ID=$(git rev-parse --short HEAD)
-          while IFS= read -r file; do
+          git fetch origin main --depth=2
+          git diff --name-only HEAD^ HEAD | grep '\.java$' | while IFS= read -r file; do
             FILE_NAME=$(basename "$file")
             curl --location 'https://verita-cog.dpacks.net/api/cognitive/upload' \
             --form "file=@${file}" \
@@ -27,3 +28,4 @@ jobs:
             --form "file_name=${FILE_NAME}" \
             --form "commit_id=${COMMIT_ID}" \
             --form "branch=${BRANCH_NAME}"
+          done
