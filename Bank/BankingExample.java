@@ -19,6 +19,14 @@ public class BankingExample {
         balance = 0;
     }
 
+    public void credit(final int amount) {
+        this.balance += amount;
+    }
+
+    public void debit(final int amount) {
+        this.balance -= amount;
+    }
+
     public void lockAccount() {
         this.isLocked = true;
     }
