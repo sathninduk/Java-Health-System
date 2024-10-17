@@ -8,6 +8,7 @@
  * 5. getBalance() - get the balance of the account
 **/
 
+
 package Bank;
 
 public class BankingExample {
